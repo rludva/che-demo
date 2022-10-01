@@ -1,28 +1,19 @@
 schemaVersion: 2.1.0
 metadata:
-  name: golang2
-  namespace: rludva-devspaces
+  name: powershell
 projects:
-  - name: golang-health-check
-    zip:
-      location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/golang-health-check.zip'
 components:
   - attributes:
       app.kubernetes.io/name: tools
       che-theia.eclipse.org/vscode-extensions:
-        - 'relative:extension/resources/github_com/golang/vscode-go/releases/download/v0_23_0/go-0.23.0.vsix'
         - 'relative:extension/resources/github_com/PowerShell/vscode-powershell/releases/download/v2022.8.5/powershell-2022.8.5.vsix'
       che-theia.eclipse.org/vscode-preferences:
-        go.lintFlags: '--fast'
-        go.lintTool: golangci-lint
     container:
       args:
         - sh
         - '-c'
         - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
       endpoints:
-        - exposure: public
-          name: health-check-endpoint
           protocol: http
           targetPort: 8080
       env:
@@ -44,24 +35,5 @@ components:
       memoryLimit: 2Gi
       mountSources: true
       sourceMapping: /projects
-      volumeMounts:
-        - name: remote-endpoint
-          path: /remote-endpoint
-        - name: plugins
-          path: /plugins
     name: tools
 commands:
-  - exec:
-      commandLine: go build
-      component: tools
-      group:
-        kind: build
-      workingDir: '${PROJECTS_ROOT}/golang-health-check'
-    id: build
-  - exec:
-      commandLine: ./golang-health-check
-      component: tools
-      group:
-        kind: run
-      workingDir: '${PROJECTS_ROOT}/golang-health-check'
-    id: run

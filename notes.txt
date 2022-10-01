@@ -1,0 +1,3 @@
+- Removed vscode-go extension and trying to use only powershell extension..
+         - 'relative:extension/resources/github_com/golang/vscode-go/releases/download/v0_23_0/go-0.23.0.vsix'
+

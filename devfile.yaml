@@ -1,6 +1,11 @@
 schemaVersion: 2.1.0
 metadata:
   name: powershell
+projects:
+  - name: chemo-repository
+    source:
+      type: git
+      location: https://github.com/rludva/chemo.git
 components:
   - attributes:
       app.kubernetes.io/name: tools

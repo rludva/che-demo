@@ -26,7 +26,7 @@ components:
         - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
           value: /remote-endpoint-powershell/plugin-remote-endpoint
         - name: THEIA_PLUGINS
-          value: 'local-dir:///plugins/sidecars/tools'
+          value: 'local-dir:///plugins-poweshell/sidecars/tools'
         - name: CHE_DASHBOARD_URL
           value: 'https://devspaces.apps.atemi.nutius.com'
         - name: CHE_PLUGIN_REGISTRY_URL
@@ -40,9 +40,9 @@ components:
       volumeMounts:
         - name: nuget
           path: /home/user/.nuget
-        - name: remote-endpoint-powershell
+        - name: remote-endpoint
           path: /remote-endpoint-powershell
-        - name: plugins-powershell
+        - name: plugins
           path: /plugins-powershell
     name: tools
   - name: nuget

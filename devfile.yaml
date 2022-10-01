@@ -19,7 +19,7 @@ components:
         - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
       endpoints:
         - exposure: public
-          name: hello-endpoint
+          name: hello-endpoint-powershell
           protocol: http
           targetPort: 5000
       env:

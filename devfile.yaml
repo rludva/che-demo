@@ -17,6 +17,7 @@ components:
         - sh
         - '-c'
         - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
+      endpoints:
       env:
         - name: GOPATH
           value: '/projects/.che/gopath:/projects'

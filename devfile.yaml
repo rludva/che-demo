@@ -1,7 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
   name: powershell
-projects:
 components:
   - attributes:
       app.kubernetes.io/name: tools
@@ -36,4 +35,3 @@ components:
       mountSources: true
       sourceMapping: /projects
     name: tools
-commands:

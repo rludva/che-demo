@@ -1,14 +1,73 @@
 schemaVersion: 2.1.0
 metadata:
-  name: powershell
+  name: dotnet-powershell
 projects:
-  - name: chemo-repository
-    git:
-      remotes:
-        origin: 'https://github.com/rludva/chemo.git'
+  - name: dotnet-powershell-simple
+    zip:
+      location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/dotnet-web-simple.zip'
 components:
   - attributes:
       app.kubernetes.io/name: tools
       che-theia.eclipse.org/vscode-extensions:
+        - 'relative:extension/resources/github_com/redhat-developer/omnisharp-theia-plugin/releases/download/v0_0_6/omnisharp_theia_plugin.theia'
+        - 'relative:extension/resources/github_com/redhat-developer/netcoredbg-theia-plugin/releases/download/v0_0_3/netcoredbg_theia_plugin.theia'
         - 'relative:extension/resources/github_com/PowerShell/vscode-powershell/releases/download/v2022.8.5/powershell-2022.8.5.vsix'
-      che-theia.eclipse.org/vscode-preferences:
+    container:
+      args:
+        - sh
+        - '-c'
+        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
+      endpoints:
+        - exposure: public
+          name: hello-endpoint
+          protocol: http
+          targetPort: 5000
+      env:
+        - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
+          value: /remote-endpoint/plugin-remote-endpoint
+        - name: THEIA_PLUGINS
+          value: 'local-dir:///plugins/sidecars/tools'
+        - name: CHE_DASHBOARD_URL
+          value: 'https://devspaces.apps.atemi.nutius.com'
+        - name: CHE_PLUGIN_REGISTRY_URL
+          value: 'https://devspaces.apps.atemi.nutius.com/plugin-registry/v3'
+        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
+          value: 'http://plugin-registry.openshift-operators.svc:8080/v3'
+      image: 'registry.redhat.io/devspaces/udi-rhel8@sha256:d55549aad15742f6f7310da0c7abc1e65dd5d3ad2e3efb8fbf414cf91b9efac7'
+      memoryLimit: 2Gi
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: nuget
+          path: /home/user/.nuget
+        - name: remote-endpoint
+          path: /remote-endpoint
+        - name: plugins
+          path: /plugins
+    name: tools
+  - name: nuget
+    volume:
+      size: 1G
+commands:
+  - exec:
+      commandLine: dotnet restore
+      component: tools
+      group:
+        kind: build
+      workingDir: '${PROJECTS_ROOT}/dotnet-web-simple'
+    id: 1-update-dependencies
+  - exec:
+      commandLine: dotnet build
+      component: tools
+      group:
+        kind: build
+      workingDir: '${PROJECTS_ROOT}/dotnet-web-simple'
+    id: 2-build
+  - exec:
+      commandLine: dotnet run
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/dotnet-web-simple'
+    id: 3-run
+

@@ -40,10 +40,6 @@ components:
       volumeMounts:
         - name: nuget
           path: /home/user/.nuget
-        - name: remote-endpoint
-          path: /remote-endpoint-powershell
-        - name: plugins
-          path: /plugins-powershell
     name: tools
   - name: nuget
     volume:

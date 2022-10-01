@@ -12,28 +12,3 @@ components:
       che-theia.eclipse.org/vscode-extensions:
         - 'relative:extension/resources/github_com/PowerShell/vscode-powershell/releases/download/v2022.8.5/powershell-2022.8.5.vsix'
       che-theia.eclipse.org/vscode-preferences:
-    container:
-      args:
-        - sh
-        - '-c'
-        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
-      env:
-        - name: GOPATH
-          value: '/projects/.che/gopath:/projects'
-        - name: GOCACHE
-          value: /tmp/.cache
-        - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
-          value: /remote-endpoint/plugin-remote-endpoint
-        - name: THEIA_PLUGINS
-          value: 'local-dir:///plugins/sidecars/tools'
-        - name: CHE_DASHBOARD_URL
-          value: 'https://devspaces.apps.atemi.nutius.com'
-        - name: CHE_PLUGIN_REGISTRY_URL
-          value: 'https://devspaces.apps.atemi.nutius.com/plugin-registry/v3'
-        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-          value: 'http://plugin-registry.openshift-operators.svc:8080/v3'
-      image: 'registry.redhat.io/devspaces/udi-rhel8@sha256:d55549aad15742f6f7310da0c7abc1e65dd5d3ad2e3efb8fbf414cf91b9efac7'
-      memoryLimit: 2Gi
-      mountSources: true
-      sourceMapping: /projects
-    name: tools

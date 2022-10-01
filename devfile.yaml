@@ -18,7 +18,7 @@ components:
         - '-c'
         - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
       endpoints:
-          protocol: http
+        - protocol: http
           targetPort: 8080
       env:
         - name: GOPATH

@@ -10,6 +10,7 @@ components:
   - attributes:
       app.kubernetes.io/name: tools
       che-theia.eclipse.org/vscode-extensions:
+        - 'relative:extension/resources/github_com/golang/vscode-go/releases/download/v0_23_0/go-0.23.0.vsix'
         - 'relative:extension/resources/github_com/PowerShell/vscode-powershell/releases/download/v2022.8.5/powershell-2022.8.5.vsix'
       che-theia.eclipse.org/vscode-preferences:
         go.lintFlags: '--fast'

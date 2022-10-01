@@ -4,7 +4,7 @@ metadata:
 projects:
   - name: chemo-repository
     git:
-      remotes: 'https://github.com/rludva/chemo.git'
+      - remotes: 'https://github.com/rludva/chemo.git'
 components:
   - attributes:
       app.kubernetes.io/name: tools

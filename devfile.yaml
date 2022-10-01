@@ -7,8 +7,6 @@ projects:
     zip:
       location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/golang-health-check.zip'
 components:
-  - type: chePlugin
-    id: ms-vscode.powershell
   - attributes:
       app.kubernetes.io/name: tools
       che-theia.eclipse.org/vscode-extensions:

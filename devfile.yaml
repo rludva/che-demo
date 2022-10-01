@@ -17,9 +17,6 @@ components:
         - sh
         - '-c'
         - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
-      endpoints:
-      - protocol: http
-        targetPort: 8080
       env:
         - name: GOPATH
           value: '/projects/.che/gopath:/projects'

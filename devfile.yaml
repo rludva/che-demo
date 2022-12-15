@@ -6,3 +6,9 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-0e189d9
       memoryLimit: 3Gi
+projects:   
+  - git:
+      remotes:
+        origin: 'https://github.com/rludva/dmaster.git'
+    name: my-project
+      
